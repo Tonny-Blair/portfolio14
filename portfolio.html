@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Karibwende Tonny Blair</title>
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-dark: #020c1b;       /* Deepest Blue */
+            --bg-card: #0a192f;       /* Lighter Dark Blue for cards */
+            --neon-blue: #00ffff;     /* Bright Cyan/Neon */
+            --text-main: #e6f1ff;     /* Off-white for readability */
+            --text-muted: #8892b0;    /* Grey-blue for secondary text */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--neon-blue);
+            padding-left: 15px;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: var(--neon-blue);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        .hero-img-container {
+            flex: 0 0 350px;
+            position: relative;
+        }
+
+        /* Styling the specific image requirement */
+        .hero-img-container img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            filter: grayscale(20%); /* Adds a slight techy feel */
+            transition: 0.3s;
+        }
+
+        .hero-img-container img:hover {
+            filter: grayscale(0%);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+        /* --- EXPERIENCE & EDUCATION GRID --- */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media(min-width: 768px) {
+            .timeline-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 { margin-bottom: 5px; font-size: 1.3rem; }
+        .card .date { color: var(--neon-blue); font-size: 0.9rem; margin-bottom: 15px; display: block; font-family: monospace; }
+        .card ul li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+        }
+        .card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category h3 {
+            color: var(--neon-blue);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #233554;
+            padding-bottom: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(0, 255, 255, 0.05);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        /* --- CERTIFICATIONS --- */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .cert-item {
+            background: var(--bg-card);
+            padding: 20px;
+            border-left: 3px solid var(--neon-blue);
+        }
+        
+        .cert-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .cert-item span { font-size: 0.85rem; color: var(--text-muted); font-family: monospace; }
+
+        /* --- CONTACT --- */
+        .contact-bar {
+            text-align: center;
+            padding: 50px 0;
+            background-color: var(--bg-card);
+            margin-top: 40px;
+        }
+        .contact-links a {
+            margin: 0 15px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        .contact-links a:hover { color: var(--neon-blue); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; justify-content: center; }
+            .hero-text { padding-right: 0; margin-top: 30px; }
+            h2 { font-size: 1.5rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <h3>Hello, I am</h3>
+                <h1>Karibwende <span class="highlight">Tonny Blair</span></h1>
+                <h3>Network Engineering Student & Future Cybersecurity Strategist</h3>
+                <p>
+                    I am a motivated student at AUCA combining technical expertise in Network Engineering with creative design and administrative precision. My goal is to build a meaningful career in cybersecurity and launch a firm dedicated to protecting African digital infrastructure.
+                </p>
+                <br>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+            <div class="hero-img-container">
+                <img src="index.jpg" alt="Karibwende Tonny Blair">
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="experience">
+            <h2>Experience & Education</h2>
+            <div class="timeline-grid">
+                
+                <div>
+                    <h3 class="highlight">Professional Experience</h3>
+                    <div class="card">
+                        <h3>Administration Officer</h3>
+                        <span class="date">Apr 2025 – Oct 2025 | Procept Africa, Kigali</span>
+                        <ul>
+                            <li>Designed high-impact pitch decks and visual graphics for investors, utilizing strong visual hierarchy.</li>
+                            <li>Created visual assets for competitive bid responses adhering to strict corporate branding.</li>
+                            <li>Collaborated with management to produce digital content that streamlined internal communication.</li>
+                            <li>Managed digital assets and documentation using Microsoft Office Suite for the creative and admin teams.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="highlight">Education</h3>
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h3>B.Sc. in Network Engineering</h3>
+                        <span class="date">2025 – Present | Adventist University of Central Africa (AUCA)</span>
+                        <p style="color: var(--text-muted);">Focusing on Network Operations, Security, and System Administration.</p>
+                    </div>
+                    <div class="card">
+                        <h3>High School Diploma (MPC)</h3>
+                        <span class="date">2022 – 2024 | Lycee De Kigali</span>
+                        <p style="color: var(--text-muted);">Mathematics, Physics, and Computer Science.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="skills">
+            <h2>Technical & Creative Skills</h2>
+            <div class="skills-container">
+                
+                <div class="skill-category">
+                    <h3>Networking & AI</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Cisco Networking</span>
+                        <span class="tag">Prompt Engineering</span>
+                        <span class="tag">AI Capabilities</span>
+                        <span class="tag">Computer Hardware</span>
+                        <span class="tag">HTML5 / CSS3</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Creative Design</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Adobe Photoshop</span>
+                        <span class="tag">Canva</span>
+                        <span class="tag">Visual Hierarchy</span>
+                        <span class="tag">CapCut & Clipchamp</span>
+                        <span class="tag">Photography & Lighting</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Admin & Operations</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Microsoft Office 365</span>
+                        <span class="tag">Stakeholder Management</span>
+                        <span class="tag">Crisis Resolution</span>
+                        <span class="tag">Strategic Representation</span>
+                        <span class="tag">Travel & Logistics</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="cert-grid">
+                
+                <div class="cert-item">
+                    <h4>IBM AI SkillsBuild</h4>
+                    <span>Intro to AI, AI Literacy, Prompt Engineering (Jan 2026)</span>
+                </div>
+
+                <div class="cert-item">
+                    <h4>Cisco Networking</h4>
+                    <span>Networking Basics & Computer Hardware (2025)</span>
+                </div>
+
+                <div class="cert-item">
+                    <h4>Internet Society</h4>
+                    <span>Advanced Network Operations 2.0 (2025)</span>
+                </div>
+
+                <div class="cert-item">
+                    <h4>Microsoft</h4>
+                    <span>Microsoft 365 Certification</span>
+                </div>
+
+                <div class="cert-item">
+                    <h4>1 Million Prompters</h4>
+                    <span>Dubai Centre for AI - Prompt Engineering (Jan 2026)</span>
+                </div>
+
+                <div class="cert-item">
+                    <h4>Other</h4>
+                    <span>Wavumbuzi Entrepreneurship, Digital Competency Passport, ALX AI Starter Kit</span>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <footer class="contact-bar" id="contact">
+        <div class="container">
+            <h2 style="border:none; margin-bottom: 20px;">Let's Build Something Secure.</h2>
+            <div class="contact-links">
+                <a href="mailto:tonnyblai012@gmail.com">tonnyblai012@gmail.com</a>
+                <a href="tel:+250786980853">+250 786 980 853</a>
+                <a href="https://www.linkedin.com/in/karibwende-blair-088012287/" target="_blank">LinkedIn Profile</a>
+            </div>
+            <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.8rem;">
+                &copy; 2026 Karibwende Tonny Blair. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
